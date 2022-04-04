@@ -31,6 +31,17 @@ public class Voo {
 		texto = datahora.format(formatter);
 		parseDateTime = LocalDateTime.parse(texto, formatter);
 	}
+
+	public Voo(Rota umaRota, Duration umaDuracao){
+		this.rota = umaRota;
+		this.duracao = umaDuracao;
+		this.datahora = LocalDateTime.of(2016, 8, 12, 12, 00);
+		formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+		texto = datahora.format(formatter);
+		parseDateTime = LocalDateTime.parse(texto, formatter);
+		numeroVoo = numProx;
+		numProx += 1;
+	}
 	
 	public Rota getRota() {
 		return rota;
