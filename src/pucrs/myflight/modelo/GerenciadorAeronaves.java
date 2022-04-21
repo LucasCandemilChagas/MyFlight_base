@@ -22,8 +22,12 @@ public class GerenciadorAeronaves {
         aero.add(a);
     }
 
-    public ArrayList<Aeronave> listarTodas(){
-        return aero;
+    public String listarTodas(){
+        String aeronaves = "\nTodas as Aeronaves:\n\n";
+
+        for (Aeronave aeronave : aero) {aeronaves+= aeronave.toString();}
+        
+        return aeronaves;
     }
 
     public Aeronave buscarPorCodigo(String cod){

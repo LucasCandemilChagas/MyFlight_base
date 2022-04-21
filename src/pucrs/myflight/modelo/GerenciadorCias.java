@@ -20,8 +20,12 @@ public class GerenciadorCias {
         return instance;
     }
 
-    public ArrayList<CiaAerea> listarTodas(){
-        return empresas;
+    public String listarTodas(){
+        String c = "Todas as Companhias Aereas:\n\n";
+
+        for (CiaAerea ciaAerea : empresas) {c+= ciaAerea.toString();}
+
+        return c;
     }
 
     public CiaAerea buscarPorCodigo(String cod){

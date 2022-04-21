@@ -30,10 +30,6 @@ public class Rota {
 	}
 
 	public String toString(){
-		return String.format("Rota do Voo: %s-%s\n %2s %2s ", 
-								getOrigem().getCodigo(), 
-								getDestino().getCodigo(), 
-								getAeronave(), 
-								getCia());
+		return "Rota do Voo: "+getOrigem().getCodigo()+"-"+getDestino().getCodigo()+"\n "+getAeronave()+" "+getCia(); 
 	}
 }

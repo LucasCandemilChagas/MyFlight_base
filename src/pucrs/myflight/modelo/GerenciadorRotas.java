@@ -20,8 +20,15 @@ public class GerenciadorRotas {
         rotas.add(r);
     }
 
-    public ArrayList<Rota> listarTodas(){
-        return rotas;
+    public String listarTodas(){
+        String rot = "Todas as Rotas:\n\n";
+        int n = 1;
+
+        for (Rota rota : rotas) {rot+= n++ +")"+rota.toString();}
+
+        rot+= "\n";
+        
+        return rot;
     }
 
     public ArrayList<Rota> buscarPorOrigem(Aeroporto orig){

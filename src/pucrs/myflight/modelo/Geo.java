@@ -4,12 +4,9 @@ public class Geo {
 	private double latitude;
 	private double longitude;
 
-	private static double i;
 	private static double d;
 	private static int r = 6371;
 
-	private static double latDistancia;
-	private static double longDistancia;
 
 	public Geo(double latitude, double longitude) {
 		this.latitude = latitude;
@@ -17,26 +14,35 @@ public class Geo {
 	}
 
 	public static double distancia(Geo p1, Geo p2) {
-		latDistancia = Math.toRadians(p1.getLatitude() - p2.getLatitude());
-		longDistancia = Math.toRadians(p1.getLongitude() - p2.getLongitude());
-
-		i = Math.pow(Math.sin(latDistancia / 2), 2) + Math.cos(p1.getLatitude()) + Math.cos(p2.getLatitude())
-				+ Math.pow(Math.sin(longDistancia / 2), 2);
-		d = 2 * r * Math.asin(Math.sqrt(i));
-
+		d = haversine(p1, p2);
 		return d;
 	}
 
+	public static double haversine(Geo p1, Geo p2)
+    {
+		double l1 = p1.getLatitude();
+		double l2 = p2.getLatitude();
+
+		double lo1 = p1.getLongitude();
+		double lo2 = p2.getLongitude();
+        
+		double dLat = (l2 - l1) *
+                      Math.PI / 180.0;
+        double dLon = (lo2 - lo1) *
+                      Math.PI / 180.0;
+ 
+        l1 = Math.toRadians(l1);
+        l2 = Math.toRadians(l2);
+ 
+        double a = Math.pow(Math.sin(dLat / 2), 2) +
+                   Math.pow(Math.sin(dLon / 2), 2) *
+                   Math.cos(l1) * Math.cos(l2);
+        double c = 2 * Math.asin(Math.sqrt(a));
+        return r * c;
+    }
+
 	public double distancia(Geo p) {
-		Geo g = new Geo(-48.5124, -2.2103);
-
-		latDistancia = Math.toRadians(p.getLatitude() - g.getLatitude());
-		longDistancia = Math.toRadians(p.getLongitude() - g.getLongitude());
-
-		i = Math.pow(Math.sin(latDistancia / 2), 2) + Math.cos(p.getLatitude()) + Math.cos(g.getLatitude())
-				+ Math.pow(Math.sin(longDistancia / 2), 2);
-		d = 2 * r * Math.asin(Math.sqrt(i));
-
+		d = haversine(p, new Geo(9.0417, 79.2301));
 		return d;
 	}
 
