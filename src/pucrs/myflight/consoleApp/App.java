@@ -20,9 +20,9 @@ public class App {
 		Aeronave a2 = new Aeronave("733", "Boeing 737-300");
 		Aeronave a3 = new Aeronave("777", "Boeing 777");
 
-		Geo g1 = new Geo(-21.4563, -43.5519);
+		Geo g1 = new Geo(21.4563, 43.5519);
 		Geo g2 = new Geo(23.4306, 46.4730);
-		Geo g3 = new Geo(25.7933, -80.2906);
+		Geo g3 = new Geo(25.7933, 80.2906);
 
 		Aeroporto aeroporto1 = new Aeroporto("SDU", "Santos-Dummont", g1);
 		Aeroporto aeroporto2 = new Aeroporto("GRU", "Guarulhos", g2);
