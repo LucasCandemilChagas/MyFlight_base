@@ -15,20 +15,16 @@ public class VooDireto extends Voo{
     private Rota r;
     private Status status;
 
-    private DateTimeFormatter formatter;
-	private String texto;
-	private LocalDateTime parseDateTime;
 
     private Duration dur;
+ 
     
     public VooDireto(Rota rota, LocalDateTime datahora) {
         super(datahora);
         this.r = rota;
         this.datahora = datahora;
         this.status = Status.CONFIRMADO;
-        formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-		texto = datahora.format(formatter);
-		parseDateTime = LocalDateTime.parse(texto, formatter);
+        
         numVoo = proxNum;
         proxNum+=1;
     }
@@ -56,11 +52,17 @@ public class VooDireto extends Voo{
    }
 
     public String mostrarVoo(){
+        DateTimeFormatter formatter;
+        String texto;
+        LocalDateTime parseDateTime;
+        formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+		texto = datahora.format(formatter);
+		parseDateTime = LocalDateTime.parse(texto, formatter);
         String r = "Voo Direto "+ numVoo +":\n\n";
         
         r+= "Status: "+status+"\n";
         
-        r+= "Rota - "+getRota()+"\n"+ "Data do Voo: "+parseDateTime+"\n"+
+        r+= "Rota - "+getRota()+"\n"+ "Data do Voo: "+parseDateTime.format(formatter)+"\n"+
             "Duracao: "+getDuration();
 
         r+= "\n-------------------------------------------------\n";

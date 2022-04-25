@@ -7,10 +7,6 @@ import java.util.ArrayList;
 
 public class VooEscalas extends Voo{
    private LocalDateTime datahora;
-   private DateTimeFormatter formatter;
-	private String texto;
-	private LocalDateTime parseDateTime;
-
    private static int proxNum = 3000;
    private int numVoo;
    
@@ -27,9 +23,6 @@ public class VooEscalas extends Voo{
       super(dh);
       this.datahora = dh;
       this.status = Status.CONFIRMADO;
-      formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-		texto = datahora.format(formatter);
-		parseDateTime = LocalDateTime.parse(texto, formatter);
       rotas = new ArrayList<>(); 
       numVoo = proxNum;
       proxNum+= 1;
@@ -67,6 +60,12 @@ public class VooEscalas extends Voo{
    }
    
    public String mostrarVoo() {
+      DateTimeFormatter formatter;
+      String texto;
+      LocalDateTime parseDateTime;
+      formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+		texto = datahora.format(formatter);
+		parseDateTime = LocalDateTime.parse(texto, formatter);
      double dT = 0;
 
      String r = "Voo com Escalas "+ numVoo +":\n\n";
@@ -85,7 +84,7 @@ public class VooEscalas extends Voo{
 
      duracao = (long) dT;
      
-     r+="Data do Voo: "+parseDateTime+"\n";
+     r+="Data do Voo: "+parseDateTime.format(formatter)+"\n";
      
      r+="Duracao Total: "+Duration.ofMinutes(duracao);
 
