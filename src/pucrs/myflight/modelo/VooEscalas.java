@@ -53,8 +53,12 @@ public class VooEscalas extends Voo{
  
    @Override
    public Duration getDuration() {
-      d = (Geo.distancia(rota.getOrigem().getLocal(), rota.getDestino().getLocal())/805)*60+30;
-      duracao = (long) d;
+      double dT = 0;
+      for(Rota rot : rotas){
+         d = (Geo.distancia(rot.getOrigem().getLocal(), rot.getDestino().getLocal())/805)*60+30;
+         dT += d;
+         duracao = (long) dT;
+      }
       dur = Duration.ofMinutes(duracao);
       return dur;
    }
@@ -66,7 +70,6 @@ public class VooEscalas extends Voo{
       formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 		texto = datahora.format(formatter);
 		parseDateTime = LocalDateTime.parse(texto, formatter);
-     double dT = 0;
 
      String r = "Voo com Escalas "+ numVoo +":\n\n";
      
@@ -79,14 +82,11 @@ public class VooEscalas extends Voo{
         duracao = (long) d;
         r+=  rot.toString();
         r+= "Duracao da Escala: "+Duration.ofMinutes(duracao)+"\n"; 
-        dT += d;
      }
-
-     duracao = (long) dT;
      
      r+="Data do Voo: "+parseDateTime.format(formatter)+"\n";
      
-     r+="Duracao Total: "+Duration.ofMinutes(duracao);
+     r+="Duracao Total: "+getDuration();
 
      r+= "\n-------------------------------------------------\n";
      
